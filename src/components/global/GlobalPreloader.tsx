@@ -2,20 +2,19 @@ import clsx from "clsx";
 import gsap from "gsap";
 import { useRef, useState, useEffect, Dispatch, SetStateAction } from "react";
 
-import { BaseBtn } from "@/components/base/BaseBtn";
-import { BaseFlipper } from "@/components/base/BaseFlipper";
-import { BaseIcon } from "@/components/base/BaseIcon";
-import styles from "@/components/styles/global/GlobalPreloader.module.css";
-import { muteAllSounds, playSoundUiClick } from "@/sounds";
-import { createCamera } from "@/three/preloader/camera";
-import { createClouds, transitionClouds, removeClouds } from "@/three/preloader/clouds";
-import { createEvents, removeEvents } from "@/three/preloader/events";
-import { createLights } from "@/three/preloader/lights";
-import { createPlane, revealPlane, transitionPlane, removePlane } from "@/three/preloader/plane";
-import { createPreloader, hidePreloader } from "@/three/preloader/preloader";
-import { createRenderer, removeRenderer } from "@/three/preloader/renderer";
-import { createScene } from "@/three/preloader/scene";
-import { createTick, removeTick } from "@/three/preloader/tick";
+import { BaseBtn } from "../base/BaseBtn";
+import { BaseFlipper } from "../base/BaseFlipper";
+import { BaseIcon } from "../base/BaseIcon";
+import styles from "../styles/global/GlobalPreloader.module.css";
+import { createCamera } from "../../three/preloader/camera";
+import { createClouds, transitionClouds, removeClouds } from "../../three/preloader/clouds";
+import { createEvents, removeEvents } from "../../three/preloader/events";
+import { createLights } from "../../three/preloader/lights";
+import { createPlane, revealPlane, transitionPlane, removePlane } from "../../three/preloader/plane";
+import { createPreloader, hidePreloader } from "../../three/preloader/preloader";
+import { createRenderer, removeRenderer } from "../../three/preloader/renderer";
+import { createScene } from "../../three/preloader/scene";
+import { createTick, removeTick } from "../../three/preloader/tick";
 
 export function GlobalPreloader({ onAnimComplete }: { onAnimComplete: Dispatch<SetStateAction<boolean>> }) {
     const root = useRef<HTMLDivElement>(null);
@@ -77,8 +76,6 @@ export function GlobalPreloader({ onAnimComplete }: { onAnimComplete: Dispatch<S
 
     const mapTransition = () => {
         gsap.to(intro.current, { duration: 0.5, autoAlpha: 0 });
-        muteAllSounds(false);
-        playSoundUiClick();
         transitionPlane();
         transitionClouds(root.current || document.createElement("div"));
         setTimeout(() => {
